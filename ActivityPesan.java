@@ -2,6 +2,7 @@ package com.example.goprint;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -94,14 +95,24 @@ public class ActivityPesan extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                      EditText srt  = bottomSheetView.findViewById(R.id.total_belanja);
+                     TextView tv   = bottomSheetView.findViewById(R.id.beli);
                      String number = String.valueOf(srt.getText());
 
                      int num = Integer.parseInt(number);
                      int hrg = Integer.parseInt(harga);
                      Keranjang cart = new Keranjang();
                      cart.total(hrg,num);
-
-
+                     cart.beli();
+                     if (cart.isLimit() == true ){
+                         Toast.makeText(getApplicationContext(), "Jumlah Order MAX Harus 5", Toast.LENGTH_SHORT).show();
+                     }else{
+                         tv.setText(String.valueOf(cart.getTotal()));
+                         tv.setTextSize(20);
+                         Intent i = new Intent(ActivityPesan.this, CartActivity.class);
+                         i.putExtra("beli", cart.getJumlah());
+                         i.putExtra("harga",cart.getHarga());
+                         startActivity(i);
+                     }
 
                     }
                 });

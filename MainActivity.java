@@ -8,6 +8,7 @@ import android.os.Bundle;
 
 import com.example.goprint.Adapter.Produk;
 import com.example.goprint.Class.Barang_Detil;
+import com.example.goprint.Interface.Keranjang;
 
 public class MainActivity extends AppCompatActivity {
     RecyclerView recyclerView;
@@ -23,6 +24,8 @@ public class MainActivity extends AppCompatActivity {
         Produk ad = new Produk(this,bg.getNama(),bg.getImg(),bg.getHarga(),bg.getCategory(),bg.getSize(),bg.getType(),bg.getPlace(),bg.getPot(),bg.getLayer(),bg.getTinggi(),bg.getDemensi());
         recyclerView.setAdapter(ad);
         recyclerView.setLayoutManager(new GridLayoutManager(this,2,RecyclerView.VERTICAL,false));
+
+
 
     }
 }

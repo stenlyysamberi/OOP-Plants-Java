@@ -7,8 +7,11 @@ import com.example.goprint.Class.ConvertRp;
 
 public class Keranjang implements Belanja{
     private int jumlah;
+    private boolean limit;
     private int total;
     private int harga;
+
+
 
     public  Keranjang(){
         this.jumlah =0;
@@ -16,6 +19,10 @@ public class Keranjang implements Belanja{
 
     public int getJumlah() {
         return jumlah;
+    }
+
+    public void setJumlah(int jumlah) {
+        this.jumlah = jumlah;
     }
 
     public void setTotal(int total) {
@@ -30,32 +37,42 @@ public class Keranjang implements Belanja{
         this.harga = harga;
     }
 
-    public void setJumlah(int jumlah) {
-        this.jumlah = jumlah;
+    public int getHarga() {
+        return harga;
+    }
+
+    public boolean isLimit() {
+        return limit;
     }
 
     @Override
     public void beli() {
-        if (this.jumlah >= MAX_ORDER){
-            Log.e("Max Order", String.valueOf(MAX_ORDER));
-        }else if(this.jumlah <= min_ORDER){
-            Log.e("Min Order", String.valueOf(min_ORDER));
+        Log.e("jumlan_beli", String.valueOf(getJumlah()));
+        if (this.jumlah >= MAX_ORDER){ //lebih besar dari 5
+            this.limit = true;
+            //Log.e("Max Order", String.valueOf(MAX_ORDER));
+
+        }else { //Lebih kecil dari 1
+            this.limit = false;
+            //Log.e("Min Order", String.valueOf(min_ORDER));
         }
     }
 
     public void total(int harga, int jumlah){
-        ConvertRp rp = new ConvertRp();
         this.harga = harga;
         this.jumlah = jumlah;
-
         total = jumlah*harga;
 
-        Log.e("total", String.valueOf(rp.toRupiah(total)));
     }
 
-    public void total(){
+    public void total( int subTotal){
+        this.total = subTotal;
 
+        ConvertRp convertRp = new ConvertRp();
+        convertRp.toRupiah(total);
+        Log.e("total", String.valueOf(convertRp.toRupiah(total)));
     }
+
 
 
 }
